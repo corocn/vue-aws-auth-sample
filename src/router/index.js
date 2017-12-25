@@ -1,15 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Amplify, { Auth } from 'aws-amplify'
-import config from '@/lib/aws_config'
+import { Auth } from 'aws-amplify'
 import Authentication from '@/components/Auth'
 import Register from '@/components/Auth/Register'
 import ConfirmRegister from '@/components/Auth/ConfirmRegister'
 import Login from '@/components/Auth/Login'
 import Logout from '@/components/Auth/Logout'
-import Action from '@/components/Action'
-
-Amplify.configure(config)
+import Dashboard from '@/components/Dashboard'
 
 Vue.use(Router)
 
@@ -18,8 +15,8 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'index',
-      component: Action
+      name: 'dashboard',
+      component: Dashboard
     },
     {
       path: '/auth',
@@ -69,8 +66,6 @@ router.beforeEach((to, from, next) => {
 
   Auth.currentAuthenticatedUser()
     .then((data) => {
-      console.log('Authenticated!!')
-      console.log(data)
       next()
     })
     .catch((err) => {

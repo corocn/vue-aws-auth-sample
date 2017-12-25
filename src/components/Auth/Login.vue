@@ -1,21 +1,40 @@
 <template>
-  <div class="login">
-    <h2>You need to login</h2>
-    <form>
-      <input type="email" v-model="email" placeholder="email"/>
-      <input type='password' v-model="password" placeholder="password"/>
-      <input type="button" @click="login" value="Login">
-    </form>
-    <router-link :to="'register'">Register</router-link>
-  </div>
+  <el-container>
+    <el-main>
+      <el-row type="flex" class="row-bg" justify="space-around">
+        <el-col :span="8"></el-col>
+        <el-col :span="8">
+          <div class="grid-content bg-purple">
+            <img src="../../assets/logo.png" />
+            <h1>Sample Apps</h1>
+            <el-row>
+              <el-form ref="form" @submit.native.prevent>
+                <el-form-item label="Email">
+                  <el-input v-model="email" type="email" name="username"></el-input>
+                </el-form-item>
+                <el-form-item label="Password">
+                  <el-input v-model="password" type="password" name="password"></el-input>
+                </el-form-item>
+                <el-button type="primary" native-type="button" @click="onSubmit">
+                  Login
+                </el-button>
+              </el-form>
+            </el-row>
+            <el-row>
+              <router-link :to="'register'">
+                Register
+              </router-link>
+            </el-row>
+          </div>
+        </el-col>
+        <el-col :span="8"></el-col>
+      </el-row>
+    </el-main>
+  </el-container>
 </template>
 
 <script>
-  import Amplify, {Auth} from 'aws-amplify'
-  import config from '@/lib/aws_config'
-
-  Amplify.configure(config)
-
+  import { mapActions } from 'vuex'
   export default {
     name: 'Login',
     data () {
@@ -25,38 +44,26 @@
       }
     },
     methods: {
-      login () {
-        Auth.signIn(this.email, this.password)
-          .then((data) => {
-            alert('ログイン成功!!')
-            this.$router.push('action')
-          })
-          .catch((err) => {
-            console.log(err)
-            alert('サインインに失敗しました')
-          })
+      ...mapActions(['login']),
+      onSubmit () {
+        this.login({
+          email: this.email,
+          password: this.password
+        })
       }
     }
   }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  h1, h2 {
-    font-weight: normal;
-  }
+.el-main {
+  text-align: center;
+}
+.el-row {
+  margin-bottom: 20px;
+}
 
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-
-  li {
-    display: inline-block;
-    margin: 0 10px;
-  }
-
-  a {
-    color: #42b983;
-  }
+img {
+  width: 100%;
+}
 </style>

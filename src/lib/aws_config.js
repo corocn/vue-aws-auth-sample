@@ -8,7 +8,7 @@ export default {
   API: {
     endpoints: [
       {
-        name: 'AmplifyTest',
+        name: 'App',
         endpoint: 'https://bpe5pb79c7.execute-api.ap-northeast-1.amazonaws.com/v1'
       }
     ]

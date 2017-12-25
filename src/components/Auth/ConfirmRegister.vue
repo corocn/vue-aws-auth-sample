@@ -1,20 +1,42 @@
 <template>
-  <div class="confirmRegister">
-    <h1>Confirm Register</h1>
-    <input type="email" v-model="email" placeholder="email"/>
-    <input type="text" v-model="code" placeholder="code on mail body"/>
-    <input type="submit" @click="submit" value="Confirm">
-  </div>
+  <el-container>
+    <el-main>
+      <el-row type="flex" class="row-bg" justify="space-around">
+        <el-col :span="8"></el-col>
+        <el-col :span="8">
+          <div class="grid-content bg-purple">
+            <img src="../../assets/register.png" />
+            <h1>Confirm Register</h1>
+            <el-row>
+              <el-form ref="form" @submit.native.prevent>
+                <el-form-item label="Email">
+                  <el-input v-model="email" type="email" name="username"></el-input>
+                </el-form-item>
+                <el-form-item label="Validation Code">
+                  <el-input v-model="code" type="text" name="code"></el-input>
+                </el-form-item>
+                <el-button type="primary" native-type="button" @click="onSubmit">
+                  Confirmed
+                </el-button>
+              </el-form>
+            </el-row>
+            <el-row>
+              <router-link :to="'login'">
+                Back to Login
+              </router-link>
+            </el-row>
+          </div>
+        </el-col>
+        <el-col :span="8"></el-col>
+      </el-row>
+    </el-main>
+  </el-container>
 </template>
 
 <script>
-  import Amplify, {Auth} from 'aws-amplify'
-  import config from '@/lib/aws_config'
-
-  Amplify.configure(config)
-
+  import { mapActions } from 'vuex'
   export default {
-    name: 'ConfirmRegister',
+    name: 'Register',
     data () {
       return {
         email: '',
@@ -22,38 +44,26 @@
       }
     },
     methods: {
-      submit () {
-        Auth.confirmSignUp(this.email, this.code)
-          .then((data) => {
-            alert('ユーザ登録が完了しました。')
-            this.$router.push('/')
-          })
-          .catch((err) => {
-            console.log(err)
-            alert('検証に失敗しました')
-          })
+      ...mapActions(['confirm_regist']),
+      onSubmit () {
+        this.confirm_regist({
+          email: this.email,
+          code: this.code
+        })
       }
     }
   }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  h1, h2 {
-    font-weight: normal;
+  .el-main {
+    text-align: center;
+  }
+  .el-row {
+    margin-bottom: 20px;
   }
 
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-
-  li {
-    display: inline-block;
-    margin: 0 10px;
-  }
-
-  a {
-    color: #42b983;
+  img {
+    width: 100%;
   }
 </style>

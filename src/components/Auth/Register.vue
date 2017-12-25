@@ -1,18 +1,40 @@
 <template>
-  <div class="register">
-    <h1>Register</h1>
-    <input type="email" v-model="email" placeholder="email"/>
-    <input type='password' v-model="password" placeholder="password"/>
-    <input type="submit" @click="submit" value="Register">
-  </div>
+  <el-container>
+    <el-main>
+      <el-row type="flex" class="row-bg" justify="space-around">
+        <el-col :span="8"></el-col>
+        <el-col :span="8">
+          <div class="grid-content bg-purple">
+            <img src="../../assets/register.png" />
+            <h1>Register</h1>
+            <el-row>
+              <el-form ref="form" @submit.native.prevent>
+                <el-form-item label="Email">
+                  <el-input v-model="email" type="email" name="username"></el-input>
+                </el-form-item>
+                <el-form-item label="Password">
+                  <el-input v-model="password" type="password" name="password"></el-input>
+                </el-form-item>
+                <el-button type="primary" native-type="button" @click="onSubmit">
+                  Regist!
+                </el-button>
+              </el-form>
+            </el-row>
+            <el-row>
+              <router-link :to="'login'">
+                Back to Login
+              </router-link>
+            </el-row>
+          </div>
+        </el-col>
+        <el-col :span="8"></el-col>
+      </el-row>
+    </el-main>
+  </el-container>
 </template>
 
 <script>
-  import Amplify, {Auth} from 'aws-amplify'
-  import config from '@/lib/aws_config'
-
-  Amplify.configure(config)
-
+  import { mapActions } from 'vuex'
   export default {
     name: 'Register',
     data () {
@@ -22,38 +44,26 @@
       }
     },
     methods: {
-      submit () {
-        Auth.signUp(this.email, this.password)
-          .then((data) => {
-            alert('登録メールアドレスに検証コードを送信しました。')
-            this.$router.push('confirm_register')
-          })
-          .catch((err) => {
-            console.log(err)
-            alert('エラーが発生しました:' + err)
-          })
+      ...mapActions(['regist']),
+      onSubmit () {
+        this.regist({
+          email: this.email,
+          password: this.password
+        })
       }
     }
   }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  h1, h2 {
-    font-weight: normal;
+  .el-main {
+    text-align: center;
+  }
+  .el-row {
+    margin-bottom: 20px;
   }
 
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-
-  li {
-    display: inline-block;
-    margin: 0 10px;
-  }
-
-  a {
-    color: #42b983;
+  img {
+    width: 100%;
   }
 </style>
