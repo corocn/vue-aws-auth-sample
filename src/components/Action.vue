@@ -13,7 +13,7 @@
   Amplify.configure(config)
 
 export default {
-    name: 'SignUp',
+    name: 'Action',
     data () {
       return {}
     },

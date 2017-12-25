@@ -1,9 +1,12 @@
 <template>
   <div class="login">
-    <h1>Login</h1>
-    <input type="email" v-model="email" placeholder="email"/>
-    <input type='password' v-model="password" placeholder="password"/>
-    <button type="button" @click="login">Login</button>
+    <h2>You need to login</h2>
+    <form>
+      <input type="email" v-model="email" placeholder="email"/>
+      <input type='password' v-model="password" placeholder="password"/>
+      <input type="button" @click="login" value="Login">
+    </form>
+    <router-link :to="'register'">Register</router-link>
   </div>
 </template>
 

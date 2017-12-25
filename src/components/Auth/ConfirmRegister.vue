@@ -1,9 +1,9 @@
 <template>
-  <div class="signUp">
-    <h1>Sign Up</h1>
+  <div class="confirmRegister">
+    <h1>Confirm Register</h1>
     <input type="email" v-model="email" placeholder="email"/>
-    <input type='password' v-model="password" placeholder="password"/>
-    <button type="button" @click="sign_up">Sign Up</button>
+    <input type="text" v-model="code" placeholder="code on mail body"/>
+    <input type="submit" @click="submit" value="Confirm">
   </div>
 </template>
 
@@ -14,23 +14,23 @@
   Amplify.configure(config)
 
   export default {
-    name: 'SignUp',
+    name: 'ConfirmRegister',
     data () {
       return {
         email: '',
-        password: ''
+        code: ''
       }
     },
     methods: {
-      sign_up () {
-        Auth.signUp(this.email, this.password)
+      submit () {
+        Auth.confirmSignUp(this.email, this.code)
           .then((data) => {
-            alert('登録メールアドレスに検証コードを送信しました。')
-            this.$router.push('confirm_sign_up')
+            alert('ユーザ登録が完了しました。')
+            this.$router.push('/')
           })
           .catch((err) => {
             console.log(err)
-            alert('エラーが発生しました:' + err)
+            alert('検証に失敗しました')
           })
       }
     }
