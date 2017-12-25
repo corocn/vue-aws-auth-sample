@@ -53,14 +53,14 @@ const router = new Router({
   ]
 })
 
-const noAuthNames = [
+const authNoNeed = [
   'login',
   'register',
   'confirm_register'
 ]
 
 router.beforeEach((to, from, next) => {
-  if (noAuthNames.includes(to.name)) {
+  if (authNoNeed.includes(to.name)) {
     return next()
   }
 

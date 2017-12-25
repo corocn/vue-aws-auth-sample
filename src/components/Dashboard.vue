@@ -27,13 +27,16 @@
     data () {
       return {}
     },
+    created () {
+      this.currentUser()
+    },
     computed: {
       message () {
         return (this.$store.state.message) ? this.$store.state.message : { title: 'No Message', type: 'info' }
       }
     },
     methods: {
-      ...mapActions(['getGuestMessage', 'getMemberMessage', 'logout']),
+      ...mapActions(['getGuestMessage', 'getMemberMessage', 'logout', 'currentUser']),
       guest () {
         this.getGuestMessage()
       },
@@ -50,7 +53,7 @@
   }
 
   .el-header {
-    background-color: #B3C0D1;
+    background-color: #6fced1;
     color: #333;
     line-height: 60px;
   }

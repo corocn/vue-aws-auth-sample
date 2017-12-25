@@ -19,6 +19,12 @@ const mutations = {
       title: title,
       type: type
     }
+  },
+  setUser (state, user) {
+    state.user = user
+  },
+  clearUser (state) {
+    state.user = null
   }
 }
 
@@ -41,6 +47,15 @@ const actions = {
       context.commit('setMessage', {title: data.message, type: 'warning'})
     }
   },
+  async currentUser (context) {
+    const data = await Auth.currentAuthenticatedUser().catch((error) => {
+      console.log(error)
+    })
+
+    if (data) {
+      context.commit('setUser', data)
+    }
+  },
   async login (context, loginData) {
     const data = await Auth.signIn(loginData.email, loginData.password).catch((error) => {
       console.log('login failed', error)
@@ -57,6 +72,7 @@ const actions = {
       alert(error)
     })
 
+    context.commit('clearUser')
     router.push('login')
   },
   async regist (context, loginData) {
