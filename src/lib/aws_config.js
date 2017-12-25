@@ -12,5 +12,10 @@ export default {
         endpoint: 'https://bpe5pb79c7.execute-api.ap-northeast-1.amazonaws.com/v1'
       }
     ]
+  },
+  Storage: {
+    bucket: 'corocn-test',
+    region: 'ap-northeast-1',
+    level: 'private'
   }
 }

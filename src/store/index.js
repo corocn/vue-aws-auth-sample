@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import router from '../router'
-import Amplify, {API, Auth} from 'aws-amplify'
+import Amplify, {API, Auth, Storage} from 'aws-amplify'
 import config from '@/lib/aws_config'
 
 Vue.use(Vuex)
@@ -46,6 +46,12 @@ const actions = {
     if (data) {
       context.commit('setMessage', {title: data.message, type: 'warning'})
     }
+
+    const result = await Storage.put('test.txt', 'Hello', {
+      contentType: 'text/plain'
+    }).catch(err => console.log(err))
+
+    console.log(result)
   },
   async currentUser (context) {
     const data = await Auth.currentAuthenticatedUser().catch((error) => {
