@@ -1,10 +1,12 @@
 # vue-aws-auth-sample
 
-サーバーレスかつ認証付きのSPAを作成したサンプルです。
+サーバーレスで認証付きのSPAを作成したサンプルです。
 
 ![vue-aws](https://user-images.githubusercontent.com/1762675/34356925-a2672a5e-ea85-11e7-8c07-cb6807eb4d88.png)
 
-AWS Amplifyを試してみたかったので、作りました。試すにはAWS側（主にCognitoやAPI Gateway）の設定が必要です。
+AWS Amplifyを試してみたかったので、作りました。
+
+試すにはAWS側（主にCognitoやAPI Gateway）の設定が必要です。
 
 ## Frontend
   
@@ -12,7 +14,7 @@ AWS Amplifyを試してみたかったので、作りました。試すにはAWS
   - [AWS Amplify](https://github.com/aws/aws-amplify)
   - vue-cli initで初期構築
 
-## Backend (AWS
+## Backend (AWS)
 
   - Cognito
   - API Gateway
