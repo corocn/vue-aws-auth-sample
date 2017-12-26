@@ -1,20 +1,20 @@
 export default {
   Auth: {
-    identityPoolId: 'ap-northeast-1:b6961bab-f191-43d4-abc1-f22d3ecef58a', // REQUIRED - Amazon Cognito Identity Pool ID
-    region: 'ap-northeast-1', // REQUIRED - Amazon Cognito Region
-    userPoolId: 'ap-northeast-1_0AnXHRtFn', // OPTIONAL - Amazon Cognito User Pool ID
-    userPoolWebClientId: '7nv7ghtgeau6b87appcbcnds5i' // OPTIONAL - Amazon Cognito Web Client ID
+    identityPoolId: 'ap-northeast-1:XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX', // Amazon Cognito Identity Pool ID
+    region: 'ap-northeast-1', // Amazon Cognito Region
+    userPoolId: 'ap-northeast-1_XXXXXXXXX', // Amazon Cognito User Pool ID
+    userPoolWebClientId: 'XXXXXXXXXXXXXXXXXXXXXXXXXX' // Amazon Cognito Web Client ID
   },
   API: {
     endpoints: [
       {
         name: 'App',
-        endpoint: 'https://bpe5pb79c7.execute-api.ap-northeast-1.amazonaws.com/v1'
+        endpoint: 'https://bpe5pb79c7.execute-api.ap-northeast-1.amazonaws.com/v1' // API Gateway Endpoint URL
       }
     ]
   },
   Storage: {
-    bucket: 'corocn-test',
+    bucket: 'YOUR_BUCKET_NAME', // S3 Bucket Name
     region: 'ap-northeast-1',
     level: 'private'
   }
