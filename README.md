@@ -35,3 +35,6 @@ AWS Amplifyを試してみたかったので、作りました。試すにはAWS
   - src/lib/aws_config.js にCongnitoとS3の設定を記述
   - `yarn dev`
 
+## License
+
+[MIT](https://opensource.org/licenses/MIT)
